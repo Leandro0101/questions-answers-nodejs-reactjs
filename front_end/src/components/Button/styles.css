@@ -1,0 +1,16 @@
+.button{
+    background: #130f40;
+    box-shadow: 1px 1px 1px 1px black;
+    outline: none;
+    border: none;
+    border-radius: 3px;
+    width: 75px;
+    transition: all 0.5s;
+}
+.button:focus{
+    outline-style: none;
+    background: #192a56;
+}
+/* #j{
+    margin-left: 20px;
+} */

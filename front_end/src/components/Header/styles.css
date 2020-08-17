@@ -1,0 +1,18 @@
+nav {
+    background: #130f40;
+}
+nav a {
+    display: flex;
+    align-items: center;
+}
+nav a h5 {
+    text-decoration: none;
+    color: #fff;
+    font-size: 15px;
+}
+#link {
+    text-decoration: none;
+}
+#icon{
+    transition: all 0.5s;
+}
