@@ -5,6 +5,7 @@ import './styles.css';
 import { GoQuestion } from 'react-icons/go';
 import Button from '../../components/Button';
 import ArrowUp from '../../components/ArrowUp';
+import { Formik, Form, Field } from 'formik';
 
 const Main = () => {
     const [questions, setQuestions] = useState([]);
@@ -19,6 +20,13 @@ const Main = () => {
         load();
     }, []);
 
+    const onSubmit = async (values, {resetForm}) => {
+        console.log(values);
+        await api.post('/answer', values);
+        resetForm({
+            values: ""
+        })
+    }
     return (
         <div className="container" id="content-questions">
             <Link to="/question" className="link-question"><Button type="button" displayIconSend="d-none" displayIconView="d-none" className="btn-question" name="Criar Tópico" /></Link>
@@ -28,15 +36,26 @@ const Main = () => {
                         <div className="card-header" id="card-question-header"><h5><GoQuestion /> {question.title}</h5></div>
                         <div className="card-body" id="card-question-body">
                             <h5 id="question-description">{question.description}</h5>
-                            <form>
-                                <div className="form-group">
-                                    <textarea type="text" className="form-control" id="input-answer" />
-                                </div>
-                                <div className="form-group" id="group-btn-view-answer">
-                                    <Link to={`/question/${question.id}`} className="link-question"><Button type="button" name="visualizar" className="btn-question" displayIconSend="d-none" displayIconQuestion="d-none" /></Link>
-                                    <Button type="button" name="Responder" displayIconView="d-none" displayIconQuestion="d-none" className="btn-question" />
-                                </div>
-                            </form>
+                            <Formik
+                            onSubmit={onSubmit}
+                                initialValues={{
+                                    body: "",
+                                    question_id: question.id
+                                }}
+                                render={({ values }) => (
+                                    <Form>
+                                        <div className="form-group">
+                                            <Field type="text" className="form-control" id="input-answer" name="body" value={values.body} />
+                                            <Field type="hidden" className="form-control" id="input-answer" name="question_id" value={values.question_id} />
+                                        </div>
+                                        <div className="form-group" id="group-btn-view-answer">
+                                            <Link to={`/answers/${question.id}`} className="link-question"><Button type="button" name="visualizar" className="btn-question" displayIconSend="d-none" displayIconQuestion="d-none" /></Link>
+                                            <Button type="submit" name="Responder" displayIconView="d-none" displayIconQuestion="d-none" className="btn-question" />
+                                        </div>
+                                    </Form>
+                                )}
+                            />
+
                         </div>
                     </div>
                 ))

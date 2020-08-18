@@ -8,7 +8,7 @@ import schema from './schema';
 
 const Question = (props) => {
     const onSubmit = async (values, {resetForm})=>{
-        const response = await api.post('ask', values);
+        await api.post('ask', values);
         resetForm({
             values: ""
         })

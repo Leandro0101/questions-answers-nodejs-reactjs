@@ -9,9 +9,10 @@
     background: #2d3436;
     width: 70%;
     transition: all 0.2s;
+    box-shadow: 1px 1px 4px 1px black;
 }
 #card-question-single:hover{
-    box-shadow: 1px 1px 1px 1px;
+    box-shadow: 1px 1px 6px 1px black;
 }
 .btn-question{
     margin-top: 20px;
